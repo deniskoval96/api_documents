@@ -5,6 +5,23 @@ You should have `maven` installed before.
     $ mvn clean install
     $ mvn spring-boot:run
 
+======================== [How To Test API] =======================
+
+## Get auth token
+POST - http://localhost:8080/login
+    request body:
+        { 
+            "username" : "given login",
+            "password" : "given password" 
+        }
+        
+## Call for instance the endpoint to check security
+GET - localhost:8080/users/all
+
+Add header 'Authorization' : 'token from `/login` endpoint'
+        
+
+
 ======================== [Endpoints] =======================
 
 ## Logged in and get auth token
@@ -69,7 +86,7 @@ Database:
 
 
 table DOCUMENT_INFO
-	user_id    document_id     document_title        signed_status (SIGNED / WAIT_SIGNING / NOT_SIGNABLE)
+	user_id    document_id     document_title        signed_status (SIGNED / WAIT_SIGNING / NOT_SIGNABLE)     
 
 
 
@@ -82,7 +99,7 @@ table DOCUMENT_DATA
 
 ========================== [ToDO] =====================
 
-Add interceptor for check Base64 creds header of logged in user
+Add interceptor for check token header of logged in user - done
 
 Add docker
 
