@@ -1,9 +1,13 @@
 package com.hackathon.api.controller;
 
 import com.hackathon.api.domain.User;
+import com.hackathon.api.domain.security.AuthToken;
+import com.hackathon.api.domain.security.UserCredentials;
 import com.hackathon.api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,12 +20,17 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-//    POST /login
+    @PostMapping("/login")
+    public AuthToken login(@RequestBody UserCredentials userCreds) {
+        return userService.login(userCreds);
+    }
 
 
     @GetMapping("/all")
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
+
+
 
 }

@@ -14,13 +14,16 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.init.DataSourceInitializer;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.sql.DataSource;
 
 @Configuration
 @MapperScan(value = "com.hackathon.api.dao", sqlSessionFactoryRef = "sqlSessionFactory")
 @PropertySource("classpath:application.properties")
-public class RootConfig {
+public class DataSourceConfig {
 
     @Value("${db.driver}")
     private String mysqlDriver;
@@ -30,6 +33,7 @@ public class RootConfig {
     private String mysqlUsername;
     @Value("${db.password}")
     private String mysqlPass;
+
 
     @Bean
     public DataSource mysqlDataSource() {
